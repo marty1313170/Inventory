@@ -1,53 +1,56 @@
 class Product:
-    product_dict = {}
-
+    
     def __init__(self, product_id, name, price, quantity):
         self.product_id = product_id
         self.name = name
         self.price = price
-        self.quantity = quantity
-        Product.product_dict[name] = self 
+        self.quantity = quantity    
 
-        
+    def update_stock(self, amount):     
+        if self.quantity + amount < 0:
+             print("Stock cannot be a negative")
+        else:
+            self.quantity += amount
+              
+    def get_total_value(self):
+         return self.price * self.quantity
+    
+    def __str__(self):
+        return f"ID: {self.product_id} | {self.name} ({self.price}) | Stock: {self.quantity}"
 
-    def update_stock(self, quantity):     
-        choose_item = input("What item would you like to update? Buy/Sell")
-        
-        if choose_item in self.product_dict:
-            print(f"Item found: {self.product_dict[choose_item]}")
-
-            product = self.product_dict[choose_item]
-            while True:
-                choose_option = input("You can \n 1. Add Stock \n 2. Minus Stock \n 3. Exit\nChoose an option: ")
-
-                if choose_option == "1":
-                    print("Stock is updating... please wait")
-                    product.quantity += 1
-                    print(f"New total stock is {product.quantity}")
-                elif choose_option == "2":
-                    print("Stock is updating... please wait")
-                    if product.quantity > 0:
-                        product.quantity -= 1
-                        print(f"New stock is {product.quantity}")
-                    else:
-                        print("Number is 0 cannot have negative stock")
-                elif choose_option == "3":
-                    break
-                else:
-                    print("invalid option ")
-
-    def get_total_value(self, quantity, price):
-
-        total = 0 
-        
-        for product in self.product_dict.values():
-            total += product.price * product.quantity
-
-            print(f"Total inventory value is {total}")
-            
-            return total
     
 class Inventory:
     def __init__(self):
+        self.products = {}
+
+    def add_product(self, product):
+        self.products[product.product_id] = product
+
+    def restock(self,product_id, amount):
+        get_product = self.products[product_id]
+        get_product.quantity += amount
+
+    def sell_product(self, product_id, amount):
+        get_product = self.products[product_id]
+        if get_product.quantity > 0 :
+            get_product.quantity -= amount
+
+    def display_all(self):
+        for indiv_product in self.products.values():
+            print(indiv_product)
+
         
 
+
+if __name__ == "__main__": 
+    def menu():
+        while True:
+              print("\n 1. Add new product \n 2. View all Inventory \n 3. Update Product Stock (Buy/Sell) \n 4.Exit")
+
+              
+
+
+  
+
+
+        
