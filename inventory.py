@@ -53,27 +53,44 @@ if __name__ == "__main__":
 
               if pick == "1":
                     
-                poduct_id = input("Enter ID: ")
+                product_id = input("Enter ID: ")
                 name = input("Enter name: ")
-                price = float(input("Enter price: "))
-                quantity = int(input("Enter quantity: "))
+                price = input("Enter price: ")
+                quantity = input("Enter quantity: ")
+
+                try:
+
+                    input_product = int(product_id)
+                    input_name = str(name)
+                    input_price = float(price)
+                    input_quantity = int(quantity)
             
-                product = Product(poduct_id, name, price, quantity)
-                inventory.add_product(product)
+                    product = Product(input_product, input_name, input_price, input_quantity)
+                    inventory.add_product(product)
+                    print("success")
+
+                except ValueError:
+                    print("Must be correct inputs in the correct format e.g ID cannot be a word or char")
 
               elif pick == "2":
                  inventory.display_all()
 
               elif pick == "3":
-                   product_id = input("Product ID?")
-                   buy_sell = input("Would you buy/sell").lower()
-                   amount= int(input("Input quantity"))       
-                   if buy_sell == "buy":
-                      inventory.sell_product(product_id, amount)
-                   elif buy_sell == "sel;":
-                      inventory.sell_product(product_id, amount)
-                   else:
-                       print("nope pick another mate")
+                   
+                   try:
+                      product_id = int(input("Product ID?"))
+                      buy_sell = input("Would you buy/sell").lower()
+                      amount = int(input("Input quantity"))       
+                      if buy_sell == "buy":
+                         inventory.sell_product(product_id, amount)
+                      elif buy_sell == "sell":
+                         inventory.sell_product(product_id, amount)
+                      else:
+                         print("nope pick another mate")
+                    
+                   except ValueError:
+                       print("Wrong format of numbers")
+                       
 
               elif pick == "4":
                   print("cya")
