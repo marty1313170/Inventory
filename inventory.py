@@ -43,11 +43,51 @@ class Inventory:
 
 
 if __name__ == "__main__": 
-    def menu():
+    
+        inventory = Inventory() 
+
         while True:
               print("\n 1. Add new product \n 2. View all Inventory \n 3. Update Product Stock (Buy/Sell) \n 4.Exit")
 
+              pick = input("Pick a option")
+
+              if pick == "1":
+                    
+                poduct_id = input("Enter ID: ")
+                name = input("Enter name: ")
+                price = float(input("Enter price: "))
+                quantity = int(input("Enter quantity: "))
+            
+                product = Product(poduct_id, name, price, quantity)
+                inventory.add_product(product)
+
+              elif pick == "2":
+                 inventory.display_all()
+
+              elif pick == "3":
+                   product_id = input("Product ID?")
+                   buy_sell = input("Would you buy/sell").lower()
+                   amount= int(input("Input quantity"))       
+                   if buy_sell == "buy":
+                      inventory.sell_product(product_id, amount)
+                   elif buy_sell == "sel;":
+                      inventory.sell_product(product_id, amount)
+                   else:
+                       print("nope pick another mate")
+
+              elif pick == "4":
+                  print("cya")
+                  break
               
+              else:
+                  print("invalid my guy")
+                  
+
+            
+ 
+
+
+
 
 
   
